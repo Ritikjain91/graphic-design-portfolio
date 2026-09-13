@@ -1,109 +1,383 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+
+type CategoryKey = "All" | "Thumbnails" | "Branding" | "Social" | "AI & UI";
 
 interface PortfolioItem {
+  id: string;
   src: string;
   title: string;
+  category: "Thumbnails" | "Branding" | "Social" | "AI & UI";
+  categoryLabel: string;
+  description: string;
 }
 
 const portfolioItems: PortfolioItem[] = [
-  { src: "/images/soundwave.jpg", title: "Soundwave Graphic" },
-  { src: "/images/hitthepipe.png", title: "Hit The Pipe - Thumbnail" },
-  { src: "/images/heavtoll.png", title: "Heavy Toll - Thumbnail" },
-  { src: "/images/aigenrated.png", title: "AI Generated Concept" },
-  { src: "/images/festival3.png", title: "Festival Design 3" },
-  { src: "/images/festival1.png", title: "Festival Design 1" },
-  { src: "/images/festival2.png", title: "Festival Design 2" },
-  { src: "/images/uiuxmobile.png", title: "Mobile UI/UX Mockup" },
-  { src: "/images/template1.png", title: "YouTube Coding Thumbnail" },
-  { src: "/images/youtubetemple.png", title: "YouTube Video Template" },
-  { src: "/images/Companylogo.png", title: "Brand Identity Logo" },
-  { src: "/images/geminicloud.png", title: "Cloud Infrastructure Graphic" },
-  { src: "/images/MarineMart.jpeg", title: "Marine Mart Logo" },
-  { src: "/images/companylogo2.png", title: "Corporate Logo Design" },
+  {
+    id: "hitthepipe",
+    src: "/images/hitthepipe.png",
+    title: "Hit The Pipe — GTA IV Thumbnail",
+    category: "Thumbnails",
+    categoryLabel: "YouTube & Gaming",
+    description:
+      "High-CTR gaming thumbnail designed with explosive lighting, character cutouts, and intense action typography.",
+  },
+  {
+    id: "heavtoll",
+    src: "/images/heavtoll.png",
+    title: "Heavy Toll — GTA IV Thumbnail",
+    category: "Thumbnails",
+    categoryLabel: "YouTube & Gaming",
+    description:
+      "Cinematic mission artwork with custom lighting, atmospheric grit, and bold visual storytelling.",
+  },
+  {
+    id: "template1",
+    src: "/images/template1.png",
+    title: "Coding Questions Thumbnail",
+    category: "Thumbnails",
+    categoryLabel: "YouTube & Gaming",
+    description:
+      "Tech tutorial thumbnail optimized for high CTR and sharp legibility on mobile YouTube feeds.",
+  },
+  {
+    id: "youtubetemple",
+    src: "/images/youtubetemple.png",
+    title: "YouTube Channel & Video Template",
+    category: "Thumbnails",
+    categoryLabel: "YouTube & Gaming",
+    description:
+      "Modern creator banner & overlay framework created for brand consistency across video releases.",
+  },
+  {
+    id: "companylogo",
+    src: "/images/Companylogo.png",
+    title: "Modern Tech Identity Logo",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Minimalist brand identity exploring geometric harmony, corporate balance, and clean iconography.",
+  },
+  {
+    id: "companylogo2",
+    src: "/images/companylogo2.png",
+    title: "Corporate Brand Identity Logo",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Dynamic logo exploration featuring smooth gradient aesthetics and a distinctive modern monogram.",
+  },
+  {
+    id: "marinemart",
+    src: "/images/MarineMart.jpeg",
+    title: "Marine Mart Commercial Logo",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Commercial maritime trade logo concept combining nautical motifs with modern retail identity.",
+  },
+  {
+    id: "festival1",
+    src: "/images/festival1.png",
+    title: "Vibrant Festival Celebration Post",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Rich cultural celebration banner with festive typography and bright celebratory color harmonies.",
+  },
+  {
+    id: "festival2",
+    src: "/images/festival2.png",
+    title: "Traditional Greeting Creative",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Elegant festive greeting graphic designed for high social media engagement and brand goodwill.",
+  },
+  {
+    id: "festival3",
+    src: "/images/festival3.png",
+    title: "Festival Holiday Art Banner",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Dynamic holiday announcement poster blending festive iconography with celebratory warmth.",
+  },
+  {
+    id: "soundwave",
+    src: "/images/soundwave.jpg",
+    title: "Soundwave Audio & Music Poster",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Abstract acoustic waveform poster art playing with digital rhythm, sound synthesis, and neon trails.",
+  },
+  {
+    id: "aigenrated",
+    src: "/images/aigenrated.png",
+    title: "Surreal AI Conceptual Artwork",
+    category: "AI & UI",
+    categoryLabel: "AI & UI/UX",
+    description:
+      "Experimental generative AI visual exploring futuristic aesthetics, surreal depth, and digital lighting.",
+  },
+  {
+    id: "geminicloud",
+    src: "/images/geminicloud.png",
+    title: "Cloud Computing Infographic",
+    category: "AI & UI",
+    categoryLabel: "AI & UI/UX",
+    description:
+      "Clean technology graphic illustrating connected systems and modern cloud computing networks.",
+  },
+  {
+    id: "uiuxmobile",
+    src: "/images/uiuxmobile.png",
+    title: "Mobile App UI/UX Flow Mockup",
+    category: "AI & UI",
+    categoryLabel: "AI & UI/UX",
+    description:
+      "Modern mobile user interface design showcasing crisp typography, card hierarchy, and fluid UX patterns.",
+  },
+];
+
+const categories: { key: CategoryKey; label: string }[] = [
+  { key: "All", label: "All Works" },
+  { key: "Thumbnails", label: "YouTube & Gaming" },
+  { key: "Branding", label: "Logos & Branding" },
+  { key: "Social", label: "Festivals & Social" },
+  { key: "AI & UI", label: "AI & UI/UX" },
 ];
 
 export default function Graphicdesign() {
-  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>("All");
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const filteredItems =
+    activeCategory === "All"
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.category === activeCategory);
+
+  const handleNext = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) =>
+      prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0
+    );
+  }, [selectedIndex, filteredItems.length]);
+
+  const handlePrev = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) =>
+      prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1
+    );
+  }, [selectedIndex, filteredItems.length]);
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === "Escape") setSelectedIndex(null);
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, handleNext, handlePrev]);
+
+  const currentItem =
+    selectedIndex !== null ? filteredItems[selectedIndex] : null;
 
   return (
-    <section className="min-h-screen bg-black px-4 py-12 sm:px-8">
+    <section id="work" className="relative px-4 py-16 sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-4 text-center text-3xl font-bold text-white sm:text-4xl">
-          My Designs &amp; Artworks
-        </h2>
-        <p className="mb-10 text-center text-gray-400 text-sm sm:text-base">
-          Click on any design to view it in full width and height
-        </p>
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs text-pink-400 font-semibold uppercase tracking-wider mb-3">
+            Portfolio Gallery
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Featured Designs &amp; Artworks
+          </h2>
+          <p className="mt-3 text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto">
+            Browse through thumbnails, corporate brand identities, festive
+            campaigns, and AI concepts. Click any card to inspect the full
+            uncompressed artwork.
+          </p>
+        </div>
 
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.key;
+            const count =
+              cat.key === "All"
+                ? portfolioItems.length
+                : portfolioItems.filter((item) => item.category === cat.key)
+                    .length;
+
+            return (
+              <button
+                key={cat.key}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(cat.key);
+                  setSelectedIndex(null);
+                }}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-md shadow-pink-600/30 scale-105"
+                    : "bg-neutral-900/80 text-neutral-400 border border-neutral-800 hover:border-neutral-700 hover:text-white"
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span
+                  className={`rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "bg-neutral-800 text-neutral-400"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Portfolio Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {portfolioItems.map((item) => (
+          {filteredItems.map((item, index) => (
             <div
-              key={item.src}
-              onClick={() => setSelectedImage(item)}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 p-4 transition-all duration-300 hover:border-pink-500/60 hover:shadow-lg hover:shadow-pink-500/10 cursor-pointer"
+              key={item.id}
+              onClick={() => setSelectedIndex(index)}
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-800/90 bg-gradient-to-b from-neutral-900/70 to-neutral-950/90 p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 cursor-pointer"
             >
-              {/* Image Container with fixed height and object-contain so NO edges are cut off */}
-              <div className="relative h-72 sm:h-80 w-full flex items-center justify-center overflow-hidden rounded-xl bg-black/40">
+              {/* Image Container with object-contain so full width & height are visible */}
+              <div className="relative h-72 sm:h-80 w-full flex items-center justify-center overflow-hidden rounded-xl bg-neutral-950/80 border border-neutral-800/50">
                 <Image
                   src={item.src}
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                  className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
                 />
+
+                {/* Category Badge overlay */}
+                <span className="absolute top-3 left-3 rounded-md bg-neutral-900/90 px-2.5 py-1 text-[11px] font-semibold text-neutral-300 backdrop-blur-md border border-neutral-800">
+                  {item.categoryLabel}
+                </span>
+
+                {/* Hover overlay hint */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="rounded-xl bg-pink-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg">
+                    🔍 View Full Design
+                  </span>
+                </div>
               </div>
 
-              {/* Title & View tag */}
-              <div className="mt-3 flex items-center justify-between text-sm">
-                <span className="font-medium text-gray-200 group-hover:text-pink-400 transition-colors">
-                  {item.title}
-                </span>
-                <span className="text-xs text-neutral-400 group-hover:text-white transition-colors bg-neutral-800 px-2 py-1 rounded">
-                  View Full ↗
-                </span>
+              {/* Card Meta details */}
+              <div className="mt-4 flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-bold text-white group-hover:text-pink-400 transition-colors line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <span className="text-xs text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">
+                    ↗
+                  </span>
+                </div>
+                <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox / Fullscreen Modal */}
-      {selectedImage && (
+      {/* Advanced Fullscreen Lightbox Modal */}
+      {currentItem && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-3 sm:p-6 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setSelectedIndex(null)}
         >
           <div
-            className="relative flex flex-col items-center max-w-5xl w-full max-h-[92vh] bg-neutral-950 border border-neutral-800 rounded-2xl p-4 overflow-hidden"
+            className="relative flex flex-col items-center max-w-6xl w-full max-h-[94vh] bg-neutral-950 border border-neutral-800 rounded-3xl p-4 sm:p-6 overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header bar */}
-            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800">
-              <h3 className="text-lg font-semibold text-white">
-                {selectedImage.title}
-              </h3>
+            {/* Modal Header */}
+            <div className="flex w-full items-center justify-between pb-4 border-b border-neutral-800">
+              <div className="flex items-center gap-3">
+                <span className="rounded-md bg-pink-500/20 text-pink-400 border border-pink-500/30 px-2.5 py-1 text-xs font-semibold">
+                  {currentItem.categoryLabel}
+                </span>
+                <h3 className="text-base sm:text-xl font-bold text-white truncate max-w-xs sm:max-w-md">
+                  {currentItem.title}
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-neutral-400 mr-2 hidden sm:inline">
+                  {selectedIndex !== null ? selectedIndex + 1 : 0} of{" "}
+                  {filteredItems.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedIndex(null)}
+                  className="rounded-xl bg-neutral-900 border border-neutral-800 px-3 py-1.5 text-sm font-semibold text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
+                >
+                  ✕ Close
+                </button>
+              </div>
+            </div>
+
+            {/* Main Image Stage */}
+            <div className="relative mt-4 w-full h-[60vh] sm:h-[68vh] flex items-center justify-center">
+              <Image
+                src={currentItem.src}
+                alt={currentItem.title}
+                fill
+                className="object-contain"
+                sizes="95vw"
+                priority
+              />
+
+              {/* Navigation Arrows */}
               <button
                 type="button"
-                onClick={() => setSelectedImage(null)}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-sm font-semibold text-gray-300 hover:bg-neutral-700 hover:text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-neutral-900/90 border border-neutral-700/80 p-3 text-white shadow-xl hover:bg-pink-600 hover:border-pink-500 transition-all hover:scale-110"
+                aria-label="Previous image"
               >
-                ✕ Close
+                ◀
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-neutral-900/90 border border-neutral-700/80 p-3 text-white shadow-xl hover:bg-pink-600 hover:border-pink-500 transition-all hover:scale-110"
+                aria-label="Next image"
+              >
+                ▶
               </button>
             </div>
 
-            {/* Full Image Display */}
-            <div className="relative mt-4 w-full h-[65vh] sm:h-[75vh] flex items-center justify-center">
-              <Image
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                fill
-                className="object-contain"
-                sizes="90vw"
-                priority
-              />
+            {/* Modal Footer / Description bar */}
+            <div className="w-full mt-4 pt-3 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-400">
+              <p className="text-center sm:text-left">{currentItem.description}</p>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-neutral-500">
+                  Tip: Use Left &amp; Right arrows to navigate
+                </span>
+              </div>
             </div>
           </div>
         </div>

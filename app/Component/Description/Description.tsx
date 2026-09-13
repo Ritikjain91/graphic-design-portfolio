@@ -1,32 +1,135 @@
 export default function Description() {
+  const tools = [
+    {
+      name: "Canva",
+      role: "Design & Composition",
+      color: "from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/30",
+    },
+    {
+      name: "Claude",
+      role: "Creative Ideation",
+      color: "from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30",
+    },
+    {
+      name: "Google Gemini",
+      role: "Visual Concepting",
+      color: "from-blue-500/20 to-indigo-500/20 text-blue-300 border-blue-500/30",
+    },
+    {
+      name: "ChatGPT",
+      role: "Strategy & Copy",
+      color: "from-emerald-500/20 to-teal-500/20 text-emerald-300 border-emerald-500/30",
+    },
+    {
+      name: "Kimi",
+      role: "Creative Research",
+      color: "from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30",
+    },
+    {
+      name: "DeepSeek",
+      role: "Prompt Engineering",
+      color: "from-rose-500/20 to-red-500/20 text-rose-300 border-rose-500/30",
+    },
+  ];
+
   return (
-    <div className="flex mb-7 justify-center bg-black px-6">
-      <div className="mt-16 max-w-4xl text-center">
-        <h2 className="text-xl sm:text-2xl font-semibold text-pink-500 tracking-wider mb-2">
-          Hi, my name is Ritik
-        </h2>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Welcome to My Graphic Design Portfolio!
+    <section id="about" className="relative overflow-hidden pt-12 pb-20 px-6 sm:px-8">
+      {/* Ambient background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[380px] bg-gradient-to-b from-pink-600/15 via-purple-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
+
+      <div className="mx-auto max-w-5xl text-center">
+        {/* Availability Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-pink-300 backdrop-blur-md mb-8">
+          <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Available for Freelance &amp; Creative Commissions</span>
+        </div>
+
+        {/* Main Headings */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-tight">
+          Hi, my name is{" "}
+          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent underline decoration-pink-500/40 decoration-wavy decoration-1 underline-offset-8">
+            Ritik Jain
+          </span>
         </h1>
 
-        <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed">
-          I created all the designs in this portfolio using{" "}
+        <p className="mt-4 text-xl sm:text-2xl font-semibold text-neutral-200">
+          Welcome to My Graphic Design Portfolio
+        </p>
+
+        {/* Bio Paragraph */}
+        <p className="mt-6 mx-auto max-w-3xl text-base sm:text-lg text-neutral-300 leading-relaxed">
+          I create all the designs in this portfolio using{" "}
           <span className="font-semibold text-white underline decoration-pink-500 decoration-2 underline-offset-4">
             Canva
           </span>
-          , along with AI tools such as{" "}
-          <span className="font-semibold text-white">
-            Claude, Google Gemini, ChatGPT, Kimi, and DeepSeek
-          </span>{" "}
-          to explore ideas, generate creative concepts, create images, and
-          improve my designs.
+          , fusing traditional graphic design principles with next-generation AI
+          tools to explore bold ideas, generate imaginative concepts, and craft
+          compelling visual experiences.
         </p>
 
-        <p className="mt-4 text-base sm:text-lg text-gray-400">
-          This portfolio showcases my creativity, design skills, and ability to
-          combine traditional design tools with modern AI technology.
-        </p>
+        {/* Action Buttons */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#work"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-pink-600/25 transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40"
+          >
+            Explore Gallery ↓
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-xl border border-neutral-800 bg-neutral-900/80 px-6 py-3.5 text-sm font-semibold text-neutral-200 backdrop-blur-md transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-800 hover:text-white"
+          >
+            Get In Touch ✉
+          </a>
+        </div>
+
+        {/* Tools Section */}
+        <div id="tools" className="mt-16 pt-10 border-t border-neutral-800/60">
+          <h2 className="text-xs uppercase tracking-widest font-bold text-neutral-400 mb-6">
+            Creative Stack &amp; AI Collaborators
+          </h2>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {tools.map((tool) => (
+              <div
+                key={tool.name}
+                className={`flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium backdrop-blur-md bg-gradient-to-r ${tool.color} transition-all duration-200 hover:scale-105 hover:border-white/30`}
+              >
+                <span className="font-bold">{tool.name}</span>
+                <span className="text-neutral-400 text-xs">({tool.role})</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Highlights Bar */}
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 border border-neutral-800/80 rounded-2xl bg-neutral-950/60 p-6 backdrop-blur-md">
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+              14+
+            </span>
+            <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider">
+              Curated Artworks
+            </span>
+          </div>
+          <div className="flex flex-col items-center border-y sm:border-y-0 sm:border-x border-neutral-800 py-3 sm:py-0">
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+              100%
+            </span>
+            <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider">
+              Original Concepts
+            </span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+              Hybrid
+            </span>
+            <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider">
+              Canva + AI Powered
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
