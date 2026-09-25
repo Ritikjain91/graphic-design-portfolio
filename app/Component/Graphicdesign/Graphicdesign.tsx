@@ -106,6 +106,60 @@ const portfolioItems: PortfolioItem[] = [
       "Dynamic holiday announcement poster blending festive iconography with celebratory warmth.",
   },
   {
+    id: "diwali-webtech",
+    src: "/images/diwali-creative.webp",
+    title: "Happy Diwali — Festival of Lights",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Traditional Diwali celebration creative designed for WebTech IT Solutions, featuring illuminated diyas and an intricate festive mandala.",
+  },
+  {
+    id: "navratri-webtech",
+    src: "/images/navratri-creative.webp",
+    title: "Happy Navratri Devotional Artwork",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Vibrant devotional social media greeting honoring Maa Durga, crafted with rich golden hues and traditional iconography.",
+  },
+  {
+    id: "dhanteras-webtech",
+    src: "/images/dhanteras-creative.webp",
+    title: "Happy Dhanteras — Festival of Prosperity",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Festival of wealth and prosperity creative showcasing an ornate golden diya and shimmering gold coins.",
+  },
+  {
+    id: "newyear-webtech",
+    src: "/images/newyear-2026.webp",
+    title: "New Year 2026 Celebration Poster",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Fresh beginnings and dreams greeting graphic designed with glowing typography, clock face, and celebratory glitter.",
+  },
+  {
+    id: "christmas-webtech",
+    src: "/images/christmas-creative.webp",
+    title: "Merry Christmas Holiday Graphic",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Season of joy & cheer Christmas greeting card featuring golden holiday bells, holly leaves, and a red silk ribbon.",
+  },
+  {
+    id: "halloween-webtech",
+    src: "/images/halloween-creative.webp",
+    title: "Happy Halloween Spooky Creative",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Atmospheric Halloween campaign artwork featuring a gothic haunted mansion, full moon silhouette, and glowing jack-o'-lanterns.",
+  },
+  {
     id: "soundwave",
     src: "/images/soundwave.jpg",
     title: "Soundwave Audio & Music Poster",
