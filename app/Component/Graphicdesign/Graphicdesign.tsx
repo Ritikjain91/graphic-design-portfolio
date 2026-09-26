@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
@@ -15,6 +15,87 @@ interface PortfolioItem {
 }
 
 const portfolioItems: PortfolioItem[] = [
+  {
+    id: "dhaba-pop-art",
+    src: "/images/dhaba_pop_art_1790429473796.jpg",
+    title: "Desi Dhaba Pop Art Creative",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Vibrant retro Indian dhaba pop art visual blending retro typography, expressive street culture, and punchy colors.",
+  },
+  {
+    id: "cocktail-299-ad",
+    src: "/images/cocktails_299_ad_1790426129243.jpg",
+    title: "Craft Cocktails @ ₹299 Promotional Ad",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "High-energy social media promotional ad designed for nightlife and bar campaigns with striking neon accents.",
+  },
+  {
+    id: "beverage-ad",
+    src: "/images/ad_attractive_graphic_1790424238607.jpg",
+    title: "Premium Beverage Campaign Graphic",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Sleek commercial beverage product poster with atmospheric lighting, splash effects, and clean brand layout.",
+  },
+  {
+    id: "canva-drink",
+    src: "/images/canva_drink_graphic_1790423998249.jpg",
+    title: "Artisanal Drink Social Creative",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Modern refreshment social poster designed with crisp visual hierarchy and Canva typographic polish.",
+  },
+  {
+    id: "carousel-cover",
+    src: "/images/carousel_slide_1_cover_1790426215053.jpg",
+    title: "Cocktail Carousel — Slide 1 (Cover)",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Cover slide for Instagram cocktail carousel featuring bold hero typography and dramatic atmospheric lighting.",
+  },
+  {
+    id: "carousel-old-fashioned",
+    src: "/images/carousel_slide_2_old_fashioned_1790426262163.jpg",
+    title: "Cocktail Carousel — Slide 2 (Old Fashioned)",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Old Fashioned feature slide with recipe highlights, golden hour tones, and premium cocktail styling.",
+  },
+  {
+    id: "carousel-gin-fizz",
+    src: "/images/carousel_slide_3_fizz_1790426287475.jpg",
+    title: "Cocktail Carousel — Slide 3 (Gin Fizz)",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Effervescent Gin Fizz spotlight creative highlighting fresh botanical garnish and sparkling textures.",
+  },
+  {
+    id: "carousel-sunset",
+    src: "/images/carousel_slide_4_sunset_1790426317259.jpg",
+    title: "Cocktail Carousel — Slide 4 (Tequila Sunset)",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Warm gradient sunset cocktail visual illustrating layered flavors and vivid evening vibes.",
+  },
+  {
+    id: "carousel-cta",
+    src: "/images/carousel_slide_5_cta_1790426341292.jpg",
+    title: "Cocktail Carousel — Slide 5 (Call To Action)",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Engaging carousel finale slide driving audience comments, saves, and bar visits.",
+  },
   {
     id: "hitthepipe",
     src: "/images/hitthepipe.png",
@@ -256,9 +337,7 @@ export default function Graphicdesign() {
             Featured Designs &amp; Artworks
           </h2>
           <p className="mt-3 text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Browse through thumbnails, corporate brand identities, festive
-            campaigns, and AI concepts. Click any card to inspect the full
-            uncompressed artwork.
+            Browse through thumbnails, corporate brand identities, festive campaigns, and AI concepts. All visuals are primarily generated using AI &amp; Antigravity, styled and composed with Canva design touches.
           </p>
         </div>
 
@@ -326,8 +405,12 @@ export default function Graphicdesign() {
 
                 {/* Hover overlay hint */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="rounded-xl bg-pink-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg">
-                    🔍 View Full Design
+                  <span className="inline-flex items-center gap-1.5 rounded-xl bg-pink-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>View Full Design</span>
                   </span>
                 </div>
               </div>
@@ -339,7 +422,9 @@ export default function Graphicdesign() {
                     {item.title}
                   </h3>
                   <span className="text-xs text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">
-                    ↗
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </span>
                 </div>
                 <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed">
@@ -380,9 +465,12 @@ export default function Graphicdesign() {
                 <button
                   type="button"
                   onClick={() => setSelectedIndex(null)}
-                  className="rounded-xl bg-neutral-900 border border-neutral-800 px-3 py-1.5 text-sm font-semibold text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800 px-3 py-1.5 text-sm font-semibold text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
                 >
-                  ✕ Close
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span>Close</span>
                 </button>
               </div>
             </div>
@@ -408,7 +496,9 @@ export default function Graphicdesign() {
                 className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-neutral-900/90 border border-neutral-700/80 p-3 text-white shadow-xl hover:bg-pink-600 hover:border-pink-500 transition-all hover:scale-110"
                 aria-label="Previous image"
               >
-                ◀
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
 
               <button
@@ -420,7 +510,9 @@ export default function Graphicdesign() {
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-neutral-900/90 border border-neutral-700/80 p-3 text-white shadow-xl hover:bg-pink-600 hover:border-pink-500 transition-all hover:scale-110"
                 aria-label="Next image"
               >
-                ▶
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
 
