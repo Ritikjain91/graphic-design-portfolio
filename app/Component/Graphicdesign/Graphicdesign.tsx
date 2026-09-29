@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
@@ -15,15 +15,85 @@ interface PortfolioItem {
 }
 
 const portfolioItems: PortfolioItem[] = [
+  // Dhaba Pop Art 5-Slide Carousel Series
   {
-    id: "dhaba-pop-art",
+    id: "dhaba-pop-art-1",
     src: "/images/dhaba_pop_art_1790429473796.jpg",
-    title: "Desi Dhaba Pop Art Creative",
+    title: "Desi Dhaba Pop Art — Slide 1 (Cover)",
     category: "Social",
     categoryLabel: "Festivals & Social",
     description:
-      "Vibrant retro Indian dhaba pop art visual blending retro typography, expressive street culture, and punchy colors.",
+      "Vibrant retro Indian dhaba pop art visual blending vintage Bollywood aesthetics, expressive street culture, and punchy colors.",
   },
+  {
+    id: "dhaba-pop-art-2",
+    src: "/images/dhaba_slide_2.jpg",
+    title: "Desi Dhaba Pop Art — Slide 2 ('Kitne Paranthe The?')",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Iconic Bollywood retro Sholay-inspired parantha special Dhaba creative with vintage Hindi typography and vivid marigold borders.",
+  },
+  {
+    id: "dhaba-pop-art-3",
+    src: "/images/dhaba_slide_3.jpg",
+    title: "Desi Dhaba Pop Art — Slide 3 ('Shaan-E-Dhaba Biryani')",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "High-octane Indian retro cop Dhaba biryani creative featuring hand-painted highway truck art styling and steaming clay handi.",
+  },
+  {
+    id: "dhaba-pop-art-4",
+    src: "/images/dhaba_slide_4.jpg",
+    title: "Desi Dhaba Pop Art — Slide 4 ('Chole Bhature Ka Tashan')",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Energetic Punjabi Dhaba chole bhature poster celebrating authentic street food culture with rich halwai aesthetics and truck motifs.",
+  },
+  {
+    id: "dhaba-pop-art-5",
+    src: "/images/dhaba_slide_5.jpg",
+    title: "Desi Dhaba Pop Art — Slide 5 ('Mogambo Khush Hua')",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Classic Shahi Dhaba dessert special spotlighting warm gulab jamun with legendary Bollywood villain Mogambo pop art illustration.",
+  },
+
+  // Indian Pop Art - Jalebi Bai
+  {
+    id: "jalebi-bai-pop-art",
+    src: "/images/jalebi_bai_pop_art.png",
+    title: "Jalebi Bai Mashhoor Jalebi Pop Art",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Exquisite Indian pop art creative featuring shimmering golden jalebis, vintage Hindi typography, traditional bangles, and ornate border patterns.",
+  },
+
+  // Drishyam Movie Campaign
+  {
+    id: "drishyam-cover",
+    src: "/images/drishyam_cover_poster.png",
+    title: "Drishyam: The Conclusion — KA Mall Cinema Poster",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "High-impact cinema advance booking poster designed for KA Mall & PVR Cinemas with gritty thriller mood, character montage, and clear CTAs.",
+  },
+  {
+    id: "drishyam-slide-2",
+    src: "/images/drishyam_ticket_offer_slide.png",
+    title: "Drishyam: The Conclusion — Advance Booking Offer",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Cinematic promotional carousel slide highlighting early-bird ₹299 ticket bookings with dramatic mystery lighting and bold textured typography.",
+  },
+
+  // Craft Cocktails & Nightlife
   {
     id: "cocktail-299-ad",
     src: "/images/cocktails_299_ad_1790426129243.jpg",
@@ -51,6 +121,8 @@ const portfolioItems: PortfolioItem[] = [
     description:
       "Modern refreshment social poster designed with crisp visual hierarchy and Canva typographic polish.",
   },
+
+  // Cocktail Carousel Series
   {
     id: "carousel-cover",
     src: "/images/carousel_slide_1_cover_1790426215053.jpg",
@@ -96,6 +168,17 @@ const portfolioItems: PortfolioItem[] = [
     description:
       "Engaging carousel finale slide driving audience comments, saves, and bar visits.",
   },
+
+  // YouTube & Gaming Thumbnails
+  {
+    id: "gaming-impossible-heist",
+    src: "/images/gaming_yt_thumb.jpg",
+    title: "Impossible Heist — Cyberpunk Gaming Thumbnail",
+    category: "Thumbnails",
+    categoryLabel: "YouTube & Gaming",
+    description:
+      "Viral high-CTR YouTube gaming thumbnail featuring explosive vault breach, cyber operative, neon sparks, and 3D textured typography.",
+  },
   {
     id: "hitthepipe",
     src: "/images/hitthepipe.png",
@@ -115,76 +198,98 @@ const portfolioItems: PortfolioItem[] = [
       "Cinematic mission artwork with custom lighting, atmospheric grit, and bold visual storytelling.",
   },
   {
-    id: "template1",
-    src: "/images/template1.png",
-    title: "Coding Questions Thumbnail",
-    category: "Thumbnails",
-    categoryLabel: "YouTube & Gaming",
-    description:
-      "Tech tutorial thumbnail optimized for high CTR and sharp legibility on mobile YouTube feeds.",
-  },
-  {
-    id: "youtubetemple",
+    id: "coding-questions-thumb",
     src: "/images/youtubetemple.png",
-    title: "YouTube Channel & Video Template",
+    title: "Barclays Coding Questions YouTube Thumbnail",
     category: "Thumbnails",
     categoryLabel: "YouTube & Gaming",
     description:
-      "Modern creator banner & overlay framework created for brand consistency across video releases.",
+      "Tech tutorial YouTube thumbnail optimized for high CTR and sharp legibility across desktop and mobile feeds.",
+  },
+
+  // Brand Identity & Logos
+  {
+    id: "aura-luxury-branding",
+    src: "/images/luxury_brand_logo.jpg",
+    title: "AURA — Luxury AI Brand Identity & Logo",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Minimalist luxury brand identity featuring an embossed geometric gold monogram, textured obsidian paper, and bespoke typography.",
   },
   {
     id: "companylogo",
     src: "/images/Companylogo.png",
-    title: "Modern Tech Identity Logo",
+    title: "WebTech IT Solutions — Brand Identity Banner",
     category: "Branding",
     categoryLabel: "Logos & Branding",
     description:
-      "Minimalist brand identity exploring geometric harmony, corporate balance, and clean iconography.",
+      "Futuristic corporate tech identity exploring circuit board iconography, glowing gradients, and clean corporate hierarchy.",
   },
   {
     id: "companylogo2",
     src: "/images/companylogo2.png",
-    title: "Corporate Brand Identity Logo",
+    title: "WebTech IT Solutions — Monogram Logo Mark",
     category: "Branding",
     categoryLabel: "Logos & Branding",
     description:
-      "Dynamic logo exploration featuring smooth gradient aesthetics and a distinctive modern monogram.",
+      "Clean vector monogram logo mark featuring intertwined digital fiber geometry and modern high-tech styling.",
   },
   {
     id: "marinemart",
     src: "/images/MarineMart.jpeg",
-    title: "Marine Mart Commercial Logo",
+    title: "Marine Mart — Maritime Brand Identity",
     category: "Branding",
     categoryLabel: "Logos & Branding",
     description:
-      "Commercial maritime trade logo concept combining nautical motifs with modern retail identity.",
+      "Commercial maritime trade logo concept combining nautical container ship motifs with crisp coastal wave iconography.",
   },
   {
-    id: "festival1",
+    id: "soundwave-identity",
+    src: "/images/soundwave.jpg",
+    title: "SoundWave Studio Solutions — Neon Logo",
+    category: "Branding",
+    categoryLabel: "Logos & Branding",
+    description:
+      "Vibrant neon audio waveform logo mark created for an audio engineering and music production studio brand.",
+  },
+  {
+    id: "soundwave-poster",
+    src: "/images/template1.png",
+    title: "SoundWave Studio Solutions — Commercial Ad",
+    category: "Social",
+    categoryLabel: "Festivals & Social",
+    description:
+      "Commercial music studio service promotion featuring audio mixer hardware, glowing sound wave graphics, and detailed pricing tiers.",
+  },
+
+  // Festivals & Cultural Celebrations
+  {
+    id: "festival1-eid",
     src: "/images/festival1.png",
-    title: "Vibrant Festival Celebration Post",
+    title: "Happy Eid — Blessed Beginnings Creative",
     category: "Social",
     categoryLabel: "Festivals & Social",
     description:
-      "Rich cultural celebration banner with festive typography and bright celebratory color harmonies.",
+      "Rich cultural celebration banner designed for WebTech IT Solutions with golden crescent moon, ornate mosque, and celebratory typography.",
   },
   {
-    id: "festival2",
+    id: "festival2-mahanavami",
     src: "/images/festival2.png",
-    title: "Traditional Greeting Creative",
+    title: "Happy Maha Navami — Power & Divine Grace",
     category: "Social",
     categoryLabel: "Festivals & Social",
     description:
-      "Elegant festive greeting graphic designed for high social media engagement and brand goodwill.",
+      "Devotional festival creative designed for SoundWave Studio Solutions with sacred trishul, damru, golden mandir, and spiritual motifs.",
   },
   {
-    id: "festival3",
+    id: "festival3-ramnavmi",
     src: "/images/festival3.png",
-    title: "Festival Holiday Art Banner",
+    title: "Happy Ram Navmi — Divine Grace & Eternal Truth",
     category: "Social",
     categoryLabel: "Festivals & Social",
     description:
-      "Dynamic holiday announcement poster blending festive iconography with celebratory warmth.",
+      "Auspicious Ram Navmi celebration banner for WebTech IT Solutions with divine bow and arrow iconography, golden temple, and prayer beads.",
   },
   {
     id: "diwali-webtech",
@@ -240,41 +345,43 @@ const portfolioItems: PortfolioItem[] = [
     description:
       "Atmospheric Halloween campaign artwork featuring a gothic haunted mansion, full moon silhouette, and glowing jack-o'-lanterns.",
   },
+
+  // AI & UI/UX Concepts
   {
-    id: "soundwave",
-    src: "/images/soundwave.jpg",
-    title: "Soundwave Audio & Music Poster",
-    category: "Social",
-    categoryLabel: "Festivals & Social",
-    description:
-      "Abstract acoustic waveform poster art playing with digital rhythm, sound synthesis, and neon trails.",
-  },
-  {
-    id: "aigenrated",
-    src: "/images/aigenrated.png",
-    title: "Surreal AI Conceptual Artwork",
+    id: "surreal-ai-artwork",
+    src: "/images/surreal_ai_artwork.jpg",
+    title: "Cosmic Consciousness — Surreal AI Art",
     category: "AI & UI",
     categoryLabel: "AI & UI/UX",
     description:
-      "Experimental generative AI visual exploring futuristic aesthetics, surreal depth, and digital lighting.",
+      "Breathtaking 3D visual concept exploring cybernetic human consciousness merging with cosmic nebulae and crystalline sacred geometry.",
   },
   {
-    id: "geminicloud",
-    src: "/images/geminicloud.png",
-    title: "Cloud Computing Infographic",
+    id: "neural-cloud-tech",
+    src: "/images/neural_cloud_tech.jpg",
+    title: "Neural Cloud & Quantum Computing Architecture",
     category: "AI & UI",
     categoryLabel: "AI & UI/UX",
     description:
-      "Clean technology graphic illustrating connected systems and modern cloud computing networks.",
+      "Futuristic 3D isometric cloud computing infrastructure poster with glowing neural data pipelines, crystal servers, and holographic nodes.",
   },
   {
-    id: "uiuxmobile",
+    id: "fintech-app-ui",
+    src: "/images/fintech_app_ui.jpg",
+    title: "AI Invest — Next-Gen Fintech Mobile UI/UX",
+    category: "AI & UI",
+    categoryLabel: "AI & UI/UX",
+    description:
+      "Ultra-modern mobile user experience featuring 3D holographic market trend visualizations, glassmorphism cards, and predictive AI financial insights.",
+  },
+  {
+    id: "jetlag-uiuxmobile",
     src: "/images/uiuxmobile.png",
-    title: "Mobile App UI/UX Flow Mockup",
+    title: "JetLag Genius — Smart Travel Mobile UI Mockup",
     category: "AI & UI",
     categoryLabel: "AI & UI/UX",
     description:
-      "Modern mobile user interface design showcasing crisp typography, card hierarchy, and fluid UX patterns.",
+      "Luxury mobile interface design featuring circadian rhythm trackers, adaptive sleep clocks, and fluid violet glassmorphism aesthetics.",
   },
 ];
 

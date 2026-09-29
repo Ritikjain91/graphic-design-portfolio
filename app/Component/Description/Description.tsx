@@ -1,4 +1,4 @@
-﻿export default function Description() {
+export default function Description() {
   const tools = [
     {
       name: "Antigravity",
@@ -123,7 +123,7 @@
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 border border-neutral-800/80 rounded-2xl bg-neutral-950/60 p-6 backdrop-blur-md">
           <div className="flex flex-col items-center">
             <span className="text-3xl font-extrabold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              25+
+              35+
             </span>
             <span className="text-xs text-neutral-400 mt-1 uppercase tracking-wider">
               Curated Artworks
